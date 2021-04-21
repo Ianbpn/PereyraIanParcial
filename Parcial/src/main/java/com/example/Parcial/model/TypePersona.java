@@ -4,7 +4,8 @@ package com.example.Parcial.model;
 
 public enum TypePersona {
     JUGADOR("Jugador"),
-    REPRESENTANTE("Representante");
+    REPRESENTANTE("Representante"),
+    AMIGO("Amigo");
 
     private String descripcion;
 

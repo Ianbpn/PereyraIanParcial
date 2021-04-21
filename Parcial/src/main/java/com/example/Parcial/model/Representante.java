@@ -17,13 +17,26 @@ public class Representante extends Persona{
     @JoinColumn
     private List<Jugador> jugadoresList;
     private Integer pesoDeLaBoveda;
+
     private Integer montoTotal;
+
+    private List<Amigo> amigosList;
 
     @Override
     public TypePersona typePersona() {return TypePersona.REPRESENTANTE;}
 
     public List<Jugador> getJugadoresList() {
         return jugadoresList;
+    }
+    public List<Amigo> getAmigosList() {
+        return amigosList;
+    }
+
+    public Integer getPesoDeLaBoveda(){
+        return jugadoresList.stream().map(Jugador::getCurrency).map(Currency::getMonto).reduce(0,Integer::sum);
+    }
+    public void setPesoDeLaBoveda(Integer pesoDeLaBoveda) {
+        this.pesoDeLaBoveda = getPesoDeLaBoveda();
     }
 
 }

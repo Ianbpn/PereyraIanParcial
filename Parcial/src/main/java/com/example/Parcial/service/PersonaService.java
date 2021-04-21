@@ -2,9 +2,8 @@ package com.example.Parcial.service;
 
 
 import com.example.Parcial.exception.AlreadyExistsException;
-import com.example.Parcial.model.Jugador;
-import com.example.Parcial.model.Persona;
-import com.example.Parcial.model.Representante;
+import com.example.Parcial.model.*;
+import com.example.Parcial.model.Cumpleañitos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,16 +14,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+
 @Service
 public class PersonaService{
 
     public PersonaRepository personaRepository;
-   // public CurrencyRepository currencyRepository;
+    public CumpleañitosService cumpleañitosService;
+
 
     @Autowired
-    public PersonaService(PersonaRepository personaRepositor, CurrencyRepository currencyRepositor){
-     personaRepository=personaRepositor;
-   //  currencyRepository=currencyRepositor;
+    public PersonaService(PersonaRepository personaRepositor, CumpleañitosService cumpleañitosService){
+     this.personaRepository=personaRepositor;
+     this.cumpleañitosService=cumpleañitosService;
     }
     public List<Persona> getAll(){return  personaRepository.findAll();}
 
@@ -51,6 +52,34 @@ public class PersonaService{
         }
         ((Representante) represante).getJugadoresList().add((Jugador) jugador);
         personaRepository.save(represante);
+    }
+
+    public void addJugadorToAmigo(Integer id, Integer idAmigo){
+        Persona represante = getPersonaByID(id);
+        Persona amigo = getPersonaByID(idAmigo);
+
+        if(!(represante instanceof Representante) || !(amigo instanceof Amigo)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        if (((Representante) represante).getAmigosList().contains(amigo)){
+            throw new AlreadyExistsException(String.format("Player " + amigo + " "));
+        }
+        ((Representante) represante).getAmigosList().add((Amigo) amigo);
+        personaRepository.save(represante);
+    }
+
+    public void addCumpleañitosToPersona(Integer id, Integer idCumpleañitos){
+        Persona persona = getPersonaByID(id);
+        Cumpleañitos cumpleañitos = cumpleañitosService.getCumpleañitosByID(idCumpleañitos);
+
+        if(!(persona instanceof Persona) || !(cumpleañitos instanceof Cumpleañitos)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        if (((Persona) persona).getCumpleañitos().contains(cumpleañitos)){
+            throw new AlreadyExistsException(String.format("Player " + cumpleañitos + " "));
+        }
+        ((Persona) persona).getCumpleañitos().add(cumpleañitos);
+        personaRepository.save(persona);
     }
 }
 

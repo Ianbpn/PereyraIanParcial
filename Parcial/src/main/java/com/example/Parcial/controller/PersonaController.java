@@ -38,5 +38,15 @@ public class PersonaController {
         personaService.addJugadorToRepresentante(id,idJugador);
     }
 
+    @PutMapping("/{id}/persona/{idamigo}")
+    public void addAmigoToRepresentante(@PathVariable Integer id, @PathVariable Integer idAmigo) {
+        personaService.addJugadorToRepresentante(id,idAmigo);
+    }
+
+    @PutMapping("/{id}/cumpleañitos/{idcumpleañitos}")
+    public void addCumpleañitosToPersona(@PathVariable Integer id, @PathVariable Integer idCumpleañitos) {
+        personaService.addCumpleañitosToPersona(id,idCumpleañitos);
+    }
+
 }
 
