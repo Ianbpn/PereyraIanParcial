@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -11,16 +13,11 @@ import java.util.List;
 @Entity
 
 public class Representante extends Persona{
+    @OneToMany(mappedBy = "persona")
+    @JoinColumn
     private List<Jugador> jugadoresList;
-    private int pesoDeLaBoveda;
-    private int montoTooal;
-
-    public Representante(int id, String name, String lastName, List<Jugador> jugadoresList, int pesoDeLaBoveda, int montoTooal) {
-        super(id, name, lastName);
-        this.jugadoresList = jugadoresList;
-        this.pesoDeLaBoveda = pesoDeLaBoveda;
-        this.montoTooal = montoTooal;
-    }
+    private Integer pesoDeLaBoveda;
+    private Integer montoTotal;
 
     @Override
     public TypePersona typePersona() {return TypePersona.REPRESENTANTE;}
@@ -29,23 +26,4 @@ public class Representante extends Persona{
         return jugadoresList;
     }
 
-    public void setJugadoresList(List<Jugador> jugadoresList) {
-        this.jugadoresList = jugadoresList;
-    }
-
-    public int getPesoDeLaBoveda() {
-        return pesoDeLaBoveda;
-    }
-
-    public void setPesoDeLaBoveda(int pesoDeLaBoveda) {
-        this.pesoDeLaBoveda = pesoDeLaBoveda;
-    }
-
-    public int getMontoTooal() {
-        return montoTooal;
-    }
-
-    public void setMontoTooal(int montoTooal) {
-        this.montoTooal = montoTooal;
-    }
 }

@@ -6,15 +6,10 @@ public enum TypePersona {
     JUGADOR("Jugador"),
     REPRESENTANTE("Representante");
 
-
-
     private String descripcion;
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    TypePersona(String descripcion) {this.descripcion=descripcion;
-    }
+
+    TypePersona(String descripcion) {this.descripcion=descripcion;}
 
     public static TypePersona find(final String value) {
         for (TypePersona P : values()) {
@@ -23,6 +18,10 @@ public enum TypePersona {
             }
         }
         throw new IllegalArgumentException(String.format("Invalid TypePersona: %s", value));
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
 }
