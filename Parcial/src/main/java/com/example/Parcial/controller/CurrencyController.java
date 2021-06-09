@@ -2,8 +2,7 @@ package com.example.Parcial.controller;
 
 
 import com.example.Parcial.model.Currency;
-import com.example.Parcial.model.Persona;
-import com.example.Parcial.service.CurrencyService;
+import com.example.Parcial.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +12,10 @@ import java.util.List;
 @RequestMapping("/currency")
 public class CurrencyController {
 
-    private final CurrencyService currencyService;
+    CurrencyService currencyService;
 
     @Autowired
-    public CurrencyController(CurrencyService currencyService){this.currencyService=currencyService;}
+    public CurrencyController(CurrencyService currencyService){ this.currencyService = currencyService;}
 
     @GetMapping ("/")
     public List<Currency>getAll(){return currencyService.getAll();}
