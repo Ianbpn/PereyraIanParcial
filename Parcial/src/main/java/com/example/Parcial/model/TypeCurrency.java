@@ -2,14 +2,14 @@ package com.example.Parcial.model;
 
 public enum TypeCurrency {
 
-    EURO("Euro"),
-    DOLAR("Dolar"),
-    PESO("Peso");
+    EURO("Euro", 111f),
+    DOLAR("Dolar", 92.67f);
 
     private String descripcion;
+    private float pesoValue;
 
 
-    TypeCurrency(String descripcion) {this.descripcion=descripcion;}
+    TypeCurrency(String descripcion, float pesoValue) {this.descripcion=descripcion; this .pesoValue=pesoValue;}
 
     public static TypeCurrency find(final String value) {
         for (TypeCurrency C : values()) {

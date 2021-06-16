@@ -19,13 +19,15 @@ import java.util.List;
 public class PersonaService{
 
     public PersonaRepository personaRepository;
-    public CumpleañitosService cumpleañitosService;
+
+    //Teniendo PersonaService en CumpleañitosService y CumpleañitosService en PersonaService me genera un bucle y no se como cambiar la logica del enunsiado para que no suceda
+    //public CumpleañitosService cumpleañitosService;
 
 
     @Autowired
-    public PersonaService(PersonaRepository personaRepositor, CumpleañitosService cumpleañitosService){
+    public PersonaService(PersonaRepository personaRepositor /*,CumpleañitosService cumpleañitosService*/){
      this.personaRepository=personaRepositor;
-     this.cumpleañitosService=cumpleañitosService;
+     //this.cumpleañitosService=cumpleañitosService;
     }
     public List<Persona> getAll(){return  personaRepository.findAll();}
 
@@ -68,7 +70,7 @@ public class PersonaService{
         personaRepository.save(represante);
     }
 
-    public void addCumpleañitosToPersona(Integer id, Integer idCumpleañitos){
+    /*public void addCumpleañitosToPersona(Integer id, Integer idCumpleañitos){
         Persona persona = getPersonaByID(id);
         Cumpleañitos cumpleañitos = cumpleañitosService.getCumpleañitosByID(idCumpleañitos);
 
@@ -80,7 +82,7 @@ public class PersonaService{
         }
         ((Persona) persona).getCumpleañitos().add(cumpleañitos);
         personaRepository.save(persona);
-    }
+    }*/
 }
 
 

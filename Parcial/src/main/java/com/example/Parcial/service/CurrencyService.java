@@ -1,7 +1,7 @@
 package com.example.Parcial.service;
 
 
-import com.example.Parcial.model.Persona;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

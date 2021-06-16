@@ -2,24 +2,24 @@ package com.example.Parcial.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
-
+@ToString
 public class Representante extends Persona{
-    @OneToMany(mappedBy = "persona")
-    @JoinColumn
+    @OneToMany
+    @JoinColumn(name = "persona_id")
     private List<Jugador> jugadoresList;
     private Integer pesoDeLaBoveda;
 
     private Integer montoTotal;
 
+    @ManyToOne(targetEntity = Amigo.class,fetch = FetchType.EAGER)
     private List<Amigo> amigosList;
 
     @Override

@@ -2,7 +2,7 @@ package com.example.Parcial.controller;
 
 
 import com.example.Parcial.model.Currency;
-import com.example.Parcial.service.*;
+import com.example.Parcial.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -7,12 +7,12 @@ public enum TypePersona {
     REPRESENTANTE("Representante"),
     AMIGO("Amigo");
 
-    private String descripcion;
+    private String description;
 
 
-    TypePersona(String descripcion) {this.descripcion=descripcion;}
+    TypePersona(String description) {this.description =description;}
 
-    public static TypePersona find(final String value) {
+    static TypePersona find(final String value) {
         for (TypePersona P : values()) {
             if (P.toString().equalsIgnoreCase(value)) {
                 return P;
@@ -21,8 +21,8 @@ public enum TypePersona {
         throw new IllegalArgumentException(String.format("Invalid TypePersona: %s", value));
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    String getDescription() {
+        return description;
     }
 
 }

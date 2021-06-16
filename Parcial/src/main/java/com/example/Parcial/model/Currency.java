@@ -3,6 +3,7 @@ package com.example.Parcial.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
+@ToString
 
 public class Currency {
     @Id

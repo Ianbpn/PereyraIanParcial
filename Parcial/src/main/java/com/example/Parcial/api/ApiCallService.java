@@ -1,8 +1,12 @@
 package com.example.Parcial.api;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,34 +20,48 @@ import java.net.http.HttpResponse;
 
 public class ApiCallService {
 
-    @CircuitBreaker(name="euroAPI", fallbackMethod = "fallback")
-    public EuroAPI getEuroApi() throws IOException, InterruptedException{
+    @CircuitBreaker(name="euro", fallbackMethod = "fallback")
+    public Float getEuroApi() throws IOException, InterruptedException{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.dolarsi.com/api/api.php?type=genedolar&opc=ta"))
-                .header("accept","application/json")
+                .header("accept", "application/json")
                 .method("GET",HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = null;
+            try{
+                response=HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        String valor = JsonParser.parseString(response.body()).getAsJsonArray().get(0).getAsJsonObject().get("dolar").getAsJsonObject().get("compra").getAsString();
 
-        return new Gson().fromJson(response.body(), EuroAPI.class);
+        return Float.parseFloat(valor.replace(",", "."));
     }
 
 
-    @CircuitBreaker(name="dolarAPI", fallbackMethod = "fallback")
-    public  DolarAPI getDolarApi() throws IOException, InterruptedException{
+    @CircuitBreaker(name="dolar", fallbackMethod = "fallback")
+    public  Float getDolarApi() throws IOException, InterruptedException{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.dolarsi.com/api/api.php?type=dolar"))
                 .header("accept","application/json")
                 .method("GET",HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = null;
+        try{
+            response=HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        String valor = JsonParser.parseString(response.body()).getAsJsonArray().get(0).getAsJsonObject().get("casa").getAsJsonObject().get("compra").getAsString();
 
-        return new Gson().fromJson(response.body(), DolarAPI.class);
+        return Float.parseFloat(valor.replace(",", "."));
     }
-    public DolarAPI fallback(final Throwable t){
+    public Float fallback(final Throwable t){
         log.info("Fallback cause,{}",t.toString());
-        return DolarAPI.builder().build();
+        return -1F;
     }
 }

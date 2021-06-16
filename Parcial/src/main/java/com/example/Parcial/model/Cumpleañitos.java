@@ -3,6 +3,7 @@ package com.example.Parcial.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString
 public class Cumpleañitos {
 
     @Id
@@ -20,13 +22,11 @@ public class Cumpleañitos {
     private Integer id;
 
     private LocalDate fecha;
-    private Persona cumpleañeros;
 
-    @Size(max = 10)
+    @ManyToOne
+    private Representante cumpleañeros;
+
     @ManyToMany
-    @JoinTable(
-            name = "Cumpleaños-Personas",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "cumpleañitos_id"))
+    @ToString.Exclude
     private Set<Persona> invitados;
 }
