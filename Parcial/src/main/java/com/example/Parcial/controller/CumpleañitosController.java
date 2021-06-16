@@ -1,7 +1,6 @@
 package com.example.Parcial.controller;
 
 import com.example.Parcial.model.Cumpleañitos;
-import com.example.Parcial.model.Persona;
 import com.example.Parcial.model.PersonaConversionDTO;
 import com.example.Parcial.service.CumpleañitosService;
 import com.example.Parcial.util.EntityUrlBuilder;

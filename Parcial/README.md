@@ -67,3 +67,35 @@
     * EURO  : https://www.dolarsi.com/api/api.php?type=genedolar&opc=ta
     * DOLAR : https://www.dolarsi.com/api/api.php?type=dolar
 * Realizar endpoint que devuelva el listado, con sus respectivos Test.   
+
+2do Recuperatorio
+Durante la fiesta Guille recibe un msj y le piden 2 promesas del futbol Argentino con lo que le debemos dar un listado de los posibles cracks del mercado Argentino.
+Nos piden que el jugador cumpla con los siguientes requisitos:
+Mayor a 1.80 de altura
+Menor de 20 años.
+Output del endpoint
+```
+{
+"Jugadores":[
+{
+"player_id": 1184,
+"firstname": "Javier Alejandro",
+"lastname": "Mascherano",
+"age": "37",
+"height": "174",
+"country": {
+"country_id": 13,
+"name": "Argentina",
+"country_code": "ar",
+"continent": "South America"
+}
+},
+{...}
+]
+}
+```
+Importante
+Seguir respetando las buenas practicas
+Realizar los llamados REST al siguiente endpoint
+https://app.sportdataapi.com/api/v1/soccer/players?apikey=YOUR_API_KEY&country_id=13 (link de registro https://app.sportdataapi.com/register)
+Realizar endpoint que devuelva el listado, con sus respectivos Test.

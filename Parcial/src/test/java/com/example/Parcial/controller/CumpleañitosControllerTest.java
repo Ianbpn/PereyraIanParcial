@@ -40,6 +40,7 @@ public class CumpleañitosControllerTest extends AbstractController {
             assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
             assertEquals(aPersonaConversionList().getContent().get(0).getAmount(), responseEntity.getBody().getClass());
         } catch (InterruptedException | ParseException | IOException e) {
+
             fail();
         }
 
@@ -54,4 +55,6 @@ public class CumpleañitosControllerTest extends AbstractController {
     public static Pageable aPageable(){
         return PageRequest.of(0,10);
     }
+
+
 }
